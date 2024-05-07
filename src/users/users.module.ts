@@ -10,8 +10,8 @@ import { User } from 'src/common/entities/user.entity';
 
 @Module({
   imports: [
-    //DatabaseModule,
-    TypeOrmModule.forFeature([User]),
+    DatabaseModule,
+    // TypeOrmModule.forFeature([User]),
     JwtModule,
     PassportModule.register({ defaultStrategy: 'jwt' }),
     JwtModule.register({
@@ -22,7 +22,7 @@ import { User } from 'src/common/entities/user.entity';
     }),
   ],
   controllers: [UsersController],
-  providers: [UsersService, JwtStrategy],
+  providers: [UsersService, JwtStrategy], 
   exports: [JwtStrategy, PassportModule, JwtModule],
 })
 export class UsersModule {}

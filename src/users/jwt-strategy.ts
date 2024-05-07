@@ -5,11 +5,13 @@ import { Repository } from 'typeorm';
 import { ExtractJwt, Strategy } from 'passport-jwt';
 import { JwtPayload } from 'src/common/interface/jwt.payload';
 import { Injectable, UnauthorizedException } from '@nestjs/common';
+import { Inject } from '@nestjs/common/decorators';
 
 @Injectable()
 export class JwtStrategy extends PassportStrategy(Strategy) {
   constructor(
-    @InjectRepository(User) private userRepository: Repository<User>,
+    // @InjectRepository(User) private userRepository: Repository<User>,
+    @Inject('USER_REPOSITORY') private userRepository: Repository<User>,
   ) {
     super({
       secretOrKey: process.env.JWTSECRET,
